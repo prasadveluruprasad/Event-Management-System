@@ -1,0 +1,39 @@
+
+/* my event and my booking page */
+
+.outterWrapper{
+    background: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,.2);
+}
+
+.row .columns.content-title-inner h1,.row .columns.content-title-inner h2{
+    color: #fff;
+}
+
+.columns.content-inner{
+    padding:40px;
+    font-size: .75em;
+}
+
+
+.row.testimonial{
+    border-top: 10px solid rgb(224, 227, 230);
+    padding-top:50px;
+    margin-top:30px;
+}
+
+.testimoial-text{
+    font-style: italic;
+}
+
+.testimonial-credits{
+    float: right;
+}
+
+.testimonials-page .row.testimonial:first-child{
+    margin-top:0;
+    padding-top: 10px;
+    border-top: 0;
+}
+
+

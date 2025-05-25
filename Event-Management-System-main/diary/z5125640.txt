@@ -1,0 +1,105 @@
+Week 1
+03/06/2020
+Created a group of 5 members.
+Discussed what topic we are most interested in and decided what project we what to do.
+The project is event management pro.
+05/06/2020
+Created a Jira group.
+06/06/2020
+Read the requirements carefully and discussed the user story with our group members.
+Wrote down 3 user stories in detail.
+
+Week 2
+10/06/2020
+Create GitHub group.
+Discuss the user interface and decide to draw ui by using Sigma.
+11/06/2020
+Draw ui for my booking page my events page.
+Draw ui for delete function.
+13/06/2020
+Start to do proposal.
+Discuss and write down the background of our project.
+
+Week 3
+15/06/2020
+Discuss and change some user story and description.
+17/06/2020
+Decide the user story of our first sprint.
+20/06/2020
+Discuss the sprint plan such as the start date and end date for each sprint.
+Complete all proposal.
+
+Week 4
+22/06/2020
+Set up GitHub account and clone the project to my computer.
+23/06/2020
+I made a my_event.html and add a button on that page called "Advertise".
+25/06/2020
+I completed advertise function. When you click the "Advertise" button, then a window pops up to input the information of the event you want to advertise. Then if you click advertise, the information will be saved in the database.
+27/06/2020
+I complete the function that show all events on the webpage collected from database.
+28/06/2020
+Set all input of advertised event to be required.
+Show the image below when you upload an image before advertise.
+Make selecting date and time of start date and end date is possible.
+
+Week 5
+01/07/2020
+Center buttons and change the style of advertise page.
+03/07/2020
+Let the image echo when change user's profile image.
+Change the book function to be a collapse style.
+04/07/2020
+Change the profile page and center the image.
+
+Week 6
+06/07/2020
+Add select seats function for booking events.
+Let the seat can be added into the input box when click this seat and the seat can be deleted synchronously from the input box when you click this seat again.
+Count the number of tickets automatically from how many seats you have selected.
+Change the seats number and the number of tickets to be readonly.
+07/07/2020
+Disable the selected seats and let this seats be red and cannot be selected.
+10/07/2020
+Let the number of initial total avaliable seats can be determined when this event advertised instead of a fixed value.
+
+Week 7
+13/07/2020
+Fixed bugs when click confirm button without input anything.
+15/07/2020
+Change the style of recharge money.
+Fixed the pop up window of changing profile image and recharge.
+18/07/2020 
+Distinguish the upcoming events and cancelled events by using different tabs on both my booking page and my events page.
+Add prompt window for user to confirm if they really want to cancel this event.
+19/07/2020
+Add prompt when the input in incorrect format.
+
+Week 8
+20/07/2020
+Fixed bug when advertise an event.
+23/07/2020
+Change the arrangement of all events.
+24/07/2020
+Add sign in and go back button on sign up page, and add sign up and go back button on sign in page.
+26/07/2020
+Write report for our project.
+
+
+Week 9
+27/07/2020
+Change the search style and the image of background of search function.
+28/07/2020
+Add confirm button on seat selection page and the user can click this button when he decide his seats.
+Add clearer prompt of recharging money when the user input in incorrect format, such as a negative number.
+Add clear warning prompt when the user does not have enough money.
+29/07/2020
+Let the host select the venue size (small, medium or large) when he advertise an event.
+Write report.
+Add background for web page.
+30/07/2020
+Debug for recharging money function. Now if the input is not a positive number if money or if the bank account is not 16 digits, there will be a prompt.
+Debug for advertise function. Now the host cannot advertise an event that the start time before the current time, and also, the host cannot advertise an event that the end time before the start time.
+
+
+

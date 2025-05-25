@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block content %}
+<title>My Booking Page!</title>
+<link rel="stylesheet" href="{{url_for('static',filename='css/foundation.min.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/stylesheet.css')}}">
+
+<!-- Apply white font color -->
+<div style="color: rgb(23, 17, 17);">
+
+<div id="fh5co-main">
+    <div class="fh5co-narrow-content">
+        <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">My Bookings</h2>
+        <div class="row row-bottom-padded-md">
+
+            <div class="row outterWrapper">
+                <div class="row content testimonials-page">
+                    <div class="columns large-12 content-inner">
+
+                        <ul id="myTab" class="nav nav-tabs animate-box"  data-animate-effect="fadeInLeft">
+                            <li class="active">
+                                <a href="#upcoming" data-toggle="tab">Upcoming Events</a>
+                            </li>
+                            <li>
+                                <a href="#cancel" data-toggle="tab">Cancelled Events</a>
+                            </li>
+                            <li>
+                                <a href="#finish" data-toggle="tab">Finished Events</a>
+                            </li>
+                        </ul>
+
+                        <div id="myTabContent" class="tab-content animate-box"  data-animate-effect="fadeInLeft">
+                            <div class="tab-pane fade in active" id="upcoming">
+                                {% for i in upcoming_events %}
+                                <div class="row testimonial">
+                                    <div class="columns large-3">
+                                        <a href="{{url_for('book_event', id=i.events.id)}}" class="blog-img">
+                                            <img style="height:200px" src="{{ i.events.url }}" class="img-responsive">
+                                        </a>
+                                    </div>
+                                    <div class="columns large-9">
+                                        <div class="testimonial-credits">
+                                            <p><b>{{i.status}}</b></p>
+                                        </div>
+                                        <p class="testimoial-text"><b>Event Title</b>: {{ i.events.title }} <br>
+                                            <b>Event description</b>: {{ i.events.description[0:200] }}...<br><br>
+                                            <b>Event Venue</b>: {{ i.events.venue }} <br>
+                                            <b>Start time</b>: {{ i.events.start_date }} End time: {{ i.events.end_date}} <br>
+                                            <b>Tickets</b>: {{ i.ticket_number }} <b>Total price</b>: {{i.total_price }}<br>
+                                            <b>Your seats</b>: {{  i.seats }}<br>
+                                            <b>Payment time</b>: {{i.booked_time}}
+                                        </p>
+                                        {% if (i.events.start_date - curr_time).days > 7 %}
+                                            <a href="/customer_cancel?booked_time={{i.booked_time}}">
+                                                <button class="btn btn-danger">Cancel</button>
+                                            </a>
+                                        {% else %}
+                                            <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="cancellation is only allowed 7 days before event starts!" disabled="disabled">Cancel</button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="tab-pane fade" id="cancel">
+                                {% for i in cancelled_events %}
+                                <div class="row testimonial">
+                                    <div class="columns large-3">
+                                        <img style="height:200px" src="{{ i.events.url }}" class="img-responsive">
+                                    </div>
+                                    <div class="columns large-9">
+                                        <div class="testimonial-credits">
+                                            <p><b>{{i.status}}</b></p>
+                                        </div>
+                                        <p class="testimoial-text"><b>Event Title</b>: {{ i.events.title }} <br>
+                                            <b>Event description</b>: {{ i.events.description[0:200] }}...<br><br>
+                                            <b>Event Venue</b>: {{ i.events.venue }} <br>
+                                            <b>Start time</b>: {{ i.events.start_date }} End time: {{ i.events.end_date}} <br>
+                                            <b>Tickets</b>: {{ i.ticket_number }} <b>Total price</b>: {{i.total_price }}<br>
+                                            <b>Your seats</b>: {{  i.seats }}<br>
+                                            <b>Payment time</b>: {{i.booked_time}}
+                                        </p>
+                                        <a href="/customer_delete?booked_time={{i.booked_time}}">
+                                            <button class="btn btn-danger">Delete</button>
+                                        </a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="tab-pane fade" id="finish">
+                                {% for i in finished_events %}
+                                <div class="row testimonial">
+                                    <div class="columns large-3">
+                                        <a href="{{url_for('book_event', id=i.events.id)}}" class="blog-img">
+                                            <img style="height:200px" src="{{ i.events.url }}" class="img-responsive">
+                                        </a>
+                                    </div>
+                                    <div class="columns large-9">
+                                        <div class="testimonial-credits">
+                                            <p><b>{{i.status}}</b></p>
+                                        </div>
+                                        <p class="testimoial-text"><b>Event Title</b>: {{ i.events.title }} <br>
+                                            <b>Event description</b>: {{ i.events.description[0:200] }}...<br><br>
+                                            <b>Event Venue</b>: {{ i.events.venue }} <br>
+                                            <b>Start time</b>: {{ i.events.start_date }} End time: {{ i.events.end_date}} <br>
+                                            <b>Tickets</b>: {{ i.ticket_number }} <b>Total price</b>: {{i.total_price }}<br>
+                                            <b>Your seats</b>: {{  i.seats }}<br>
+                                            <b>Payment time</b>: {{i.booked_time}}
+                                        </p>
+                                        <a href="/customer_delete?booked_time={{i.booked_time}}">
+                                            <button class="btn btn-danger">Delete</button>
+                                        </a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <br><br><br><br>
+                {% if reco != [] %}
+                <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">You May Also Like:</h2>
+                <p style="color: white;" class="fh5co animate-box" data-animate-effect="fadeInLeft">Recommend based on your booked events</p>
+                {% for i in reco %}
+                <div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
+                    <div style="height: 400px" class="blog-entry">
+                        <a href="{{url_for('book_event', id=i.id)}}" class="blog-img">
+                            <img style="height: 200px" src="{{ i.url }}" class="img-responsive">
+                        </a>
+                        <div class="desc">
+                            <h3><a href="{{url_for('book_event', id=i.id)}}">{{ i.title }}</a></h3>
+                            <span>{{ i.start_date }}</span>
+                            <a href="{{url_for('book_event', id=i.id)}}" class="lead">check out here<i class="icon-arrow-right3"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div> <!-- white text wrapper -->
+
+{% endblock %}

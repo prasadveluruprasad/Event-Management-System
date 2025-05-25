@@ -1,0 +1,384 @@
+{% extends "base.html" %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Food Event Page!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<div id="fh5co-main">
+    <div class="fh5co-narrow-content">
+        <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft" style="color: #1a1a2e;">
+            FOOD & DRINK EVENTS
+        </h2>
+
+        <div class="row row-bottom-padded-md">
+            {% for i in event %}
+                {% if i.status == "upcoming" %}
+                    <div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
+                        <div class="blog-entry">
+                            <a href="{{ url_for('book_event', id=i.id) }}" class="blog-img">
+                                <img src="{{ i.url }}" alt="{{ i.title }}" class="img-responsive">
+                            </a>
+                            <div class="desc">
+                                <h3><a href="{{ url_for('book_event', id=i.id) }}">{{ i.title }}</a></h3>
+                                <span>{{ i.start_date }}</span>
+                                <p>{{ i.description }}</p>
+                                {# Timer display for upcoming events #}
+                                <div class="event-timer" id="timer-{{ i.id }}"></div>
+                                <a href="{{ url_for('book_event', id=i.id) }}" class="lead">
+                                    Check out here <i class="icon-arrow-right3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft" style="color: #1a1a2e;">
+            Finished events
+        </h2>
+
+        <div class="row row-bottom-padded-md">
+            {% for i in event %}
+                {% if i.status == "finished" %}
+                    <div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
+                        <div class="blog-entry">
+                            <a href="{{ url_for('book_event', id=i.id) }}" class="blog-img">
+                                <img src="{{ i.url }}" alt="{{ i.title }}" class="img-responsive">
+                            </a>
+                            <div class="desc">
+                                <h3><a href="{{ url_for('book_event', id=i.id) }}">{{ i.title }}</a></h3>
+                                <span>{{ i.start_date }}</span>
+                                <p>{{ i.description }}</p>
+                                {# Display for finished events #}
+                                <div class="event-status timed-out">Timed Out</div>
+                                {# Disabled link for finished events #}
+                                <a href="{{ url_for('book_event', id=i.id) }}" class="lead disabled">
+                                    Check out here <i class="icon-arrow-right3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.getElementById('food_event').className = "fh5co-active";
+
+    // JavaScript for event timers (5-minute countdown for "Check out now")
+    function setupBookingCountdown(elementId, durationInSeconds) {
+        let timer = durationInSeconds;
+        const timerElement = document.getElementById(elementId);
+
+        if (!timerElement) {
+            console.error("Timer element not found:", elementId);
+            return;
+        }
+
+        const interval = setInterval(function() {
+            const minutes = parseInt(timer / 60, 10);
+            const seconds = parseInt(timer % 60, 10);
+
+            timerElement.innerHTML = "Booking ends in: " +
+                (minutes < 10 ? "0" + minutes : minutes) + "m " +
+                (seconds < 10 ? "0" + seconds : seconds) + "s ";
+
+            if (--timer < 0) {
+                clearInterval(interval);
+                timerElement.innerHTML = "Booking Timed Out!";
+                // Optionally, disable the "Check out now" link when the timer runs out
+                const leadLink = timerElement.nextElementSibling; // Assumes 'lead' link is the next sibling
+                if (leadLink && leadLink.classList.contains('lead')) {
+                    leadLink.classList.add('disabled');
+                    leadLink.href = "#"; // Prevent navigation
+                    leadLink.innerHTML = "Booking Closed"; // Change link text
+                }
+            }
+        }, 1000);
+    }
+
+    // Loop through upcoming events to set up the 5-minute booking timer
+    {% for i in event %}
+        {% if i.status == "upcoming" %}
+            // Set up a 5-minute (300 seconds) countdown for each upcoming event's booking
+            setupBookingCountdown("timer-{{ i.id }}", 300); // 5 minutes * 60 seconds/minute
+        {% endif %}
+    {% endfor %}
+</script>
+
+<style type="text/css">
+/* Color Palette inspired by Canva's vibrant and clean aesthetic, adapted for a darker theme */
+:root { /* Define custom properties for easier color management */
+    --canva-blue: #00b3cc;
+    --canva-purple: #9b28a2;
+    --canva-pink: #eb2f90;
+    --canva-green: #00cc99;
+    --canva-yellow: #ffc800;
+    --dark-grey-bg: #1a1a2e; /* Darker background */
+    --card-bg: #20203a; /* Slightly lighter dark for cards */
+    --text-light: #e0e0e0; /* Light text for dark background */
+    --btn-primary-bg: #6a0572; /* A deep purple for primary buttons */
+    --btn-secondary-bg: #4a4a6a; /* A muted dark grey for secondary buttons */
+    --border-color: #3b3b5b; /* A subtle dark border */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-light); /* Light text on dark background */
+    line-height: 1.6;
+    background-color: var(--dark-grey-bg); /* Dark background */
+    margin: 0;
+    padding: 0;
+}
+
+#fh5co-main {
+    padding: 2rem 0; /* Add padding to the main content area */
+}
+
+.fh5co-narrow-content {
+    max-width: 1200px; /* Limit content width for readability */
+    margin: 0 auto; /* Center content */
+    padding: 0 1rem; /* Horizontal padding */
+}
+
+/* Main Content Headings */
+.fh5co-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8em;
+    font-weight: 700;
+    color: var(--text-light); /* Light color for headings */
+    text-align: center;
+    margin-top: 3rem; /* Adjusted from initial to work with new structure */
+    margin-bottom: 2.5rem; /* Adjusted for better spacing */
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.fh5co-heading::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 5px;
+    background: linear-gradient(to right, var(--canva-blue), var(--canva-pink)); /* Updated gradient */
+    border-radius: 2px;
+}
+
+/* Row padding */
+.row-bottom-padded-md {
+    padding-bottom: 50px;
+}
+
+/* Column padding */
+.col-padding {
+    padding: 15px; /* Standard padding between columns */
+}
+
+/* Event Cards Styling */
+.blog-entry {
+    background-color: var(--card-bg); /* Card background color */
+    border-radius: 8px; /* Softer rounded corners for cards */
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* More pronounced shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 480px; /* Adjusted min-height for consistent card size */
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-entry:hover {
+    transform: translateY(-8px); /* Lift effect on hover */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
+}
+
+.blog-entry .blog-img {
+    display: block;
+    width: 100%;
+    height: 250px; /* Increased height for image display */
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid var(--border-color); /* Subtle border below image */
+}
+
+.blog-entry .blog-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the area, cropping as needed */
+    transition: transform 0.4s ease;
+}
+
+.blog-entry:hover .blog-img img {
+    transform: scale(1.08); /* Zoom effect on hover */
+}
+
+.blog-entry .desc {
+    padding: 1.5rem; /* Ample padding inside the description area */
+    flex-grow: 1; /* Allows description to take available space */
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-entry .desc h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4em; /* Slightly larger title */
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.blog-entry .desc h3 a {
+    color: var(--text-light); /* Light text for titles */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.blog-entry .desc h3 a:hover {
+    color: var(--canva-blue); /* Highlight on hover */
+}
+
+.blog-entry .desc span {
+    display: block;
+    font-size: 0.875rem; /* Smaller date font */
+    color: var(--text-light);
+    opacity: 0.8; /* Slightly dim date */
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.blog-entry .desc p {
+    font-size: 0.95em;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit description to 3 lines */
+    -webkit-box-orient: vertical;
+}
+
+.blog-entry .desc .lead { /* Changed from .btn to .lead to match original structure */
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05em;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    margin-top: auto; /* Pushes the button to the bottom of the card */
+    background-color: var(--btn-primary-bg); /* Primary button color */
+    color: var(--white); /* White text for buttons */
+    border: none;
+    cursor: pointer;
+}
+
+.blog-entry .desc .lead:hover {
+    background-color: var(--canva-pink); /* Hover color for primary button */
+    transform: translateX(5px);
+}
+
+.blog-entry .desc .lead i {
+    margin-left: 8px;
+    font-size: 0.9em;
+}
+
+/* Styles for timers and "timed out" status */
+.event-timer {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--canva-yellow); /* Bright yellow for timer */
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    background-color: rgba(255, 200, 0, 0.15); /* Light yellow background for timer */
+    border-radius: 5px;
+    text-align: center;
+}
+
+.event-status.timed-out {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--canva-pink); /* Distinct pink for timed out */
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    background-color: rgba(235, 47, 144, 0.15); /* Light pink background for timed out */
+    border-radius: 5px;
+    text-align: center;
+}
+
+.lead.disabled {
+    pointer-events: none; /* Disable clicks */
+    opacity: 0.5; /* Dim the link */
+    cursor: not-allowed;
+    background-color: var(--btn-secondary-bg); /* Greyed out for disabled */
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .fh5co-heading {
+        font-size: 2.2em;
+    }
+    .blog-entry .desc h3 {
+        font-size: 1.3em;
+    }
+    .blog-entry .blog-img {
+        height: 220px;
+    }
+    .blog-entry {
+        min-height: 440px;
+    }
+}
+
+@media (max-width: 767px) {
+    .fh5co-heading {
+        font-size: 2em;
+        margin-bottom: 40px;
+    }
+    .blog-entry .desc h3 {
+        font-size: 1.2em;
+    }
+    .blog-entry .blog-img {
+        height: 200px;
+    }
+    .col-md-3 {
+        width: 100%;
+    }
+    .blog-entry {
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 575px) {
+    .fh5co-heading {
+        font-size: 1.8em;
+    }
+    .blog-entry .desc p {
+        font-size: 0.95em;
+    }
+    .blog-entry .desc .lead {
+        font-size: 0.95em;
+        padding: 0.6rem 1rem;
+    }
+    .blog-entry .blog-img {
+        height: 160px;
+    }
+    .blog-entry {
+        min-height: 360px;
+    }
+}
+</style>
+
+{% endblock %}

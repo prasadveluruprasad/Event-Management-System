@@ -1,0 +1,113 @@
+Week 1
+Group formed and project chosen in the lab time. 
+We held our first group meeting, during which we had a clear analysis about the requirements of our project. 
+And then assigned equal parts of user stories to each member. After this, we discussed and selected which language and frameworks to be used and looked at what are assessed in proposal. Also, We set up Jira account.
+
+
+Week 2
+What was done
+1. GitHub account and group repo created.
+2. Almost finished user stories. 
+3. Learned user interface drawing tool (Figma)
+4. Started designing relevant UI diagram and flow chart based on what user stories I did.
+5. Regular meeting and progress sharing 
+
+Plan for next period
+1. Finish my part of user stories and UI design.
+2. Upload user stories to Jira.
+3. Finish the rest of parts of proposal.
+4. Start coding (framework installed and database set up)
+
+
+
+Week 3
+What was done
+1. Finish proposal including all my work on user stories, UI design, flow chart and architecture diagram.
+2. User stories updates on Jira
+3. Started learning MySQL tutorials (no previous experience on this)
+4. Started coding the basics
+
+
+Plan for next period
+1. Set up MySql database, Flask framework and bootstrap framework and all of relevant third parties libraries.
+2. implement functions according to the user stories on first sprint.
+3. Update Jira to reflect what is going on.
+4. Hold scrum meeting for individual progress sharing.
+
+
+
+Week4 
+What was done
+1. I set up working directory of our project and provided all libraries path to my teammates.
+2. I did initial set up of database with Tony including building modules and authethication checking.
+3. I created home page, and displays all events on our homepage. Also, I made event view pages for all types of events.
+4. I also created event details page where user can view detailed information about it.
+
+Plan for next week
+1. Follow next sprint, coding according to user stories on Jira.
+2. Group demo and Retrospective meeting 
+
+
+Week 5
+What was done
+1. continuously tracked progress of project and updated related information on user stories in Jira.
+2. I designed the style of my booking page and my event page.
+3. I finished the all of booking function except for the seat selection.
+4. I did presentation for group demo.
+
+
+Plan for next period
+1. Implement all functions about canceling events.
+2. Retrospective meeting.
+
+
+
+Week 6
+What was done 
+1. discussed what went well and what did not go well and wrote retrospective report.
+2. Designed and implement cancelling function.
+3. Designed email function.
+
+Plan for next period
+1. review function implementation as shown in Jira.
+2. Prepare for the demoB in week 8
+
+
+
+Week7
+What was done
+1. I designed and implemented the layout and style of comment session.
+2. I updated all the css files and Js files, making them as static files.
+3. I fixed homepage indentation issues;
+
+Plan for next period
+1. Searching function and recommendation functions implementation.
+2. Project Demo B.
+3. retropective report B.
+
+
+
+Week 8
+What was done
+1. We held regular meeting towards everything to the final.
+2. I implemented the first-version design of search bar and recommendation function
+3. I re-changed the layerout of event display on index page.
+4. we had a Demo B on lab.
+5. We held retropective meeting B and finished retrospective report.
+
+plan for next period
+1. Final UI update.
+2. Final report start.
+3. Final presentation practise.
+
+From week 9 to final presentation
+1. I re-changed the layerout of event display on index page
+2. I added sliding animation for all events.
+3. Final debugging and improvement of UI
+4. I practised final presentation.(my part including group introduction,
+descriptions of evey web page, search function and recommendation)
+5. I wrote final report.
+
+
+
+

@@ -1,0 +1,609 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Include Bootstrap 4 CSS & JS + jQuery & Popper.js -->
+<!-- jQuery (required by Bootstrap 4 and below) -->
+
+  <style>
+    p1,p2,p3,p4,p5,p6{
+      font-weight: 900
+    }
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+    #img-upload{
+        width: 100%;
+    }
+    
+    .img-circle{
+        clip-path: circle();
+    }
+   
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+.plane {
+  margin: 20px auto;
+  max-width: 300px;
+}
+
+.cockpit {
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  border-bottom: 5px solid #d8d8d8;
+}
+.cockpit:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 500px;
+  width: 100%;
+  border-radius: 50%;
+  border-right: 5px solid #d8d8d8;
+  border-left: 5px solid #d8d8d8;
+}
+.cockpit h1 {
+  width: 60%;
+  margin: 100px auto 35px auto;
+}
+
+.exit {
+  position: relative;
+  height: 50px;
+}
+.exit:before, .exit:after {
+  content: "EXIT";
+  font-size: 14px;
+  line-height: 18px;
+  padding: 0px 2px;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  display: block;
+  position: absolute;
+  background: green;
+  color: white;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.exit:before {
+  left: 0;
+}
+.exit:after {
+  right: 0;
+}
+
+.fuselage {
+  border-right: 5px solid #d8d8d8;
+  border-left: 5px solid #d8d8d8;
+}
+
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.seats {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+.seat {
+  display: flex;
+  flex: 0 0 {{ size }}%;
+  padding: 5px;
+  position: center;
+}
+{#.seat:nth-child(3) {#}
+{#  margin-right: 14.28571428571429%;#}
+{#}#}
+.seat input[type=checkbox] {
+  position: absolute;
+  opacity: 0;
+}
+.seat input[type=checkbox]:checked + label {
+  background: #ffff8e;
+  -webkit-animation-name: rubberBand;
+  animation-name: rubberBand;
+  animation-duration: 300ms;
+  animation-fill-mode: both;
+}
+.seat input[type=checkbox]:disabled + label {
+  background: #dd0d1e;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+.seat input[type=checkbox]:disabled + label:after {
+  content: "X";
+  text-indent: 0;
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+.seat input[type=checkbox]:disabled + label:hover {
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.seat label {
+  display: block;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.5rem;
+  padding: 4px 0;
+  background: #11b32f;
+  border-radius: 5px;
+  animation-duration: 300ms;
+  animation-fill-mode: both;
+}
+.seat label:before {
+  content: "";
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  top: 1px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+}
+.seat label:hover {
+  cursor: pointer;
+  box-shadow: 0 0 0px 2px #5C6AFF;
+}
+
+@-webkit-keyframes rubberBand {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes rubberBand {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+.rubberBand {
+  -webkit-animation-name: rubberBand;
+  animation-name: rubberBand;
+}
+</style>
+</head>
+<body>
+  {% extends "base.html" %}
+{% block content %}
+<title>Event Page!</title>
+<link rel="stylesheet" href="{{url_for('static',filename='css/single.css')}}">
+<div id="fh5co-main">
+    <div class="fh5co-narrow-content">
+        <div class="row row-bottom-padded-md">
+            <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+                <img class="img-responsive" style="height:500px; border:ridge" src={{event.url}}>
+            </div>
+
+            <div class="col-md-6 animate-box" >
+                <h2 class="fh5co-heading">{{ event.title}}</h2>
+                <p>{{ event.description}}</p>
+                <br><br>
+                <p1>Host by: {{event.users.name}}</p1>
+                <br>
+                <p2>Type: {{ event.tags}}</p2>
+                <br>
+                <p3>Venue: {{ event.venue}}</p3>
+                <br>
+                 <p4>Start Date: {{ event.start_date}}</p4>
+                <br>
+                 <p5>End Date: {{ event.end_date}}</p5>
+                <br>
+                <p6>Available tickets: {{available_tickets}}  &nbsp  Price: {{ event.ticket_price}} $ </p6>
+            </div>
+
+        </div>
+        <div class=" booking button">
+            {% if available_tickets == 0 %}
+            <button type="submit" class="btn btn-primary" disabled="disabled">Sold Out</button>
+            {% elif username != None and event.status == 'finished' %}
+            <button type="submit" class="btn btn-primary" disabled="disabled">Finished</button>
+            {% elif username != None and event.status == 'upcoming' %}
+            <p style="color: red">{{ msg }}</p>
+
+              <a class="btn btn-success" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Book now!
+              </a>
+            {% elif username == None %}
+                <a href="sign_in">Sign in first before booking your event --></a>
+            {% endif %}
+        </div>
+
+<!--        ticket booking collapse window-->
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <form method='POST' action='/book_event:{{event.id}}' oninput="total.value=parseInt(ticket_number.value)*{{event.ticket_price}}">
+                    <div class="modal-body">
+                        <!--   tickets status      >-->
+                        <div class="form-group">
+                            <div>
+                                <label for="recipient-name"  class="col-form-label">Price per ticket: {{event.ticket_price}} $</label>
+                            </div>
+                            <div>
+                                <label for="recipient-name"  class="col-form-label">Available tickets: {{available_tickets}} left</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#seats">Select Seats</button>
+                                <br>
+                                <label for="recipient-name"  class="col-form-label">Number of tickets you bought</label>
+                                <input type="text" name="ticket_number" class="form-control" id="recipient-name" readonly>
+                            </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Your seat numbers:</label>
+                            <br>
+                            <input type="text" name="seat" class="form-control" id="mySeats" readonly>
+
+                                <div class="modal fade bd-example-modal-lg" id="seats" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-toggle="modal">
+{#                                    <object style="border:0px" type="text/x-scriptlet" data="seats" width=90% height=90%></object>#}
+                                    <div class="container">
+                                        <div class="cinema">
+                                            <center>
+                                            <h1 style="color: white">Please select your seat numbers</h1>
+                                            </center>
+                                        </div>
+                                            <!--seat selection-->
+                                        <ol>
+                                           {% for i in range(row_len) %}
+                                            <li class="row row--0">
+                                                <ol class="seats" type="A">
+                                                {% for j in range(col_len) %}
+                                                  {% if (row[i] + col[j]) not in booked_seats %}
+                                                  <li class="seat">
+                                                      <input onclick="checkBox(this)" type="checkbox" id={{ row[i] + col[j] }}>
+                                                      <label for={{  row[i] + col[j] }}>{{  row[i] + col[j] }}</label>
+                                                  </li>
+                                                  {% else %}
+                                                      <li class="seat">
+                                                        <input type="checkbox" disabled id={{ row[i] + col[j] }} />
+                                                        <label for={{ row[i] + col[j] }}>Occupied</label>
+                                                      </li>
+                                                  {% endif %}
+                                                {% endfor %}
+                                            </ol>
+                                            </li>
+                                            {% endfor %}
+                                        </ol>
+                                            <!-- seat selection end-->
+                                    <br>
+                                    <center><button class="btn btn-primary" type="button" data-dismiss="modal">confirm</button></center>
+                                    </div>
+                                </div>
+                         </div>
+                        <div class="col-form-label">
+                            <p><b>Total price: </b></p><output name="total"></output>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" onclick="checkEmpty()">Confirm</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+<!--        ticket booking window end -->
+
+        <div class="single">
+            <div class="container">
+                <div class="single-main">
+                    <!--    review section -->
+                    <div class="col-md-8 single-left">
+                        <div class="reply">
+                            <form method='POST' class="{{event.status}}/{{already_leave_review}}/{{already_booked}}/{{username}}" id="review_form">
+                                <h4>Leave Your Review</h4>
+                                {{rvForm.csrf_token}}
+                                {{rvForm.description.label}}
+                                {{rvForm.description}}
+                                {{rvForm.submit}}
+                            </form>
+                        </div>
+                        <div class="comments">
+                            <h4>Comments</h4>
+                            {% if reviews == [] %}
+                            <h3>No Comments yet</h3>
+                            {% else %}
+                            {% for i in range(review_len-1, -1, -1) %}
+                            <div>
+                                <div class="col-md-2 cmts-main-left">
+										<img src="{{ reviews[i].users.url }}" class='img-circle' alt="">
+									</div>
+                    <div class="col-md-10 cmts-main-right">
+                    <div class="cmts">
+											<div class="col-md-6 cmnts-left">
+												<h5>{{ reviews[i].users.name }}</h5>
+											</div>
+											<div class="col-md-6 cmnts-right">
+												<a href="#">On {{ reviews[i].time }}</a>
+											</div>
+                        </div>
+                          <p class="columns large-9"> {{ reviews[i].description }}</p>
+                          {% if reviews[i].user_id != user_id and username != None %}
+                          <a class="cmnts-btn" data-toggle="collapse" href="#review{{reviews[i].id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Reply
+                          </a>
+                          <br>
+                          <br>
+                            <div class="collapse" id="review{{reviews[i].id}}">
+                              <div class="card card-body">
+                                  <form method='POST' action="/reply_to_review?id={{reviews[i].event_id}}?{{reviews[i].time}}">
+                                      <div class="modal-body">
+                                          <div class="form-group">
+                                            <div class="reply">
+                                              {{rpForm.csrf_token}}
+                                              {{rpForm.description}}
+                                              {{rpForm.submit}}
+                                            </div>
+                                          </div>
+                                        </div>
+                                  </form>
+                                </div>
+                              </div>
+                                {% endif %}
+                                {% for j in range(reply_len-1, -1, -1) %}
+                                {% if reviews[i].time == replies[j].reply_to_time %}
+                                <div class="col-md-2 cmts-main-left">
+                                            <img src="{{ replies[j].users.url }}" class='img-circle' alt="">
+                                        </div>
+                                <div class="col-md-10 cmts-main-right">
+                                             <div class="cmts">
+                                                 <div class="col-md-6 cmnts-left">
+                                                    <h5>{{ replies[j].users.name }}</h5>
+                                                </div>
+                                                 <div class="col-md-6 cmnts-right">
+                                                    <a href="#">On {{ replies[j].time }}</a>
+                                                </div>
+                                                 <div class="testimonial-credits">
+                                                     <p><b> Reply to {{replies[j].reply_to}}:</b> {{ replies[j].description }}</p>
+                                                 </div>
+                                                 {% if replies[j].replyer_id != user_id and username != None %}
+                                                 <a class="cmnts-btn" data-toggle="collapse" href="#reply{{replies[j].id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                     Reply
+                                                 </a>
+                                                 <div class="collapse" id="reply{{replies[j].id}}">
+                                                     <div class="card card-body">
+                                                         <form method='POST' action="/reply_to_reply?id={{replies[j].event_id}}?{{replies[j].replyer_id}}?{{reviews[i].time}}">
+                                                             <div class="modal-body">
+                                                                 <div class="form-group">
+                                                                     <div class="reply">
+                                                                         {{rpForm.csrf_token}}
+                                                                         {{rpForm.description}}
+                                                                         {{rpForm.submit}}
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                         </form>
+                                                     </div>
+                                                 </div>
+                                                 {% else %}
+                                                 <br>
+                                                 {% endif %}
+                                             </div>
+                                             <div class="clearfix"></div>
+                                        </div>
+                                {% endif %}
+                                {% endfor %}
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!--    recommendation section -->
+                    <div class="col-md-4 single-right">
+                        <h3>You may also like</h3>
+                    <p>Recommend based on this event</p>
+                        {% for i in reco %}
+                          {% if i.id != event.id %}
+                        <div class="recent">
+                            <div class="col-md-5 recent-left">
+                              <a href="{{url_for('book_event', id=i.id)}}"><img style="height: 100px" src="{{ i.url }}" alt=""></a>
+                            </div>
+                            <div style="height: 100px;" class="col-md-7 recent">
+                                <label>Start time: {{i.start_date}}</label>
+                                <p>Event title: {{i.title}}</p>
+                            </div>
+                        </div>
+                          {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+			</div>
+		</div>
+
+    </div>
+</div>
+
+<script>
+var info = document.getElementById("review_form").className;
+var attributes = info.split("/");
+var event_status = attributes[0];
+var already_reviewed = attributes[1];
+var already_booked = attributes[2];
+var username = attributes[3];
+review_button = document.getElementById("review_button");
+
+if (username == "None"){
+    title = "You should log in first before leaving a review."
+    review_button.setAttribute("title", title);
+    review_button.setAttribute("disabled", "disable");
+    review_button.setAttribute("class", "btn btn-danger");
+    review_button.setAttribute("data-toggle", "tooltip");
+    review_button.setAttribute("data-placement", "top");
+    document.getElementById("review box").innerHTML = title;
+
+} else if (event_status == "finished" && already_booked == "False"){
+    title = "You can not leave a review because you have not attended this event."
+    review_button.setAttribute("title", title);
+    review_button.setAttribute("disabled", "disable");
+    review_button.setAttribute("class", "btn btn-danger");
+    review_button.setAttribute("data-toggle", "tooltip");
+    review_button.setAttribute("data-placement", "top");
+     document.getElementById("review box").innerHTML = title;
+
+} else if (already_booked == "False"){
+    title = "Book this event first before commenting it."
+    review_button.setAttribute("title", title);
+    review_button.setAttribute("disabled", "disable");
+    review_button.setAttribute("class", "btn btn-danger");
+    review_button.setAttribute("data-toggle", "tooltip");
+    review_button.setAttribute("data-placement", "top");
+    document.getElementById("review box").innerHTML = title;
+
+} else if(already_booked == "True" && event_status != "finished"){
+    title = "You can only leave a review after event finished."
+    review_button.setAttribute("title", title);
+    review_button.setAttribute("disabled", "disable");
+    review_button.setAttribute("class", "btn btn-danger");
+    review_button.setAttribute("data-toggle", "tooltip");
+    review_button.setAttribute("data-placement", "top");
+    document.getElementById("review box").innerHTML = title;
+
+} else if(already_reviewed == "True"){
+    title = "You can leave only one review. "
+    review_button.setAttribute("title", title);
+    review_button.setAttribute("disabled", "disable");
+    review_button.setAttribute("class", "btn btn-danger");
+    review_button.setAttribute("data-toggle", "tooltip");
+    review_button.setAttribute("data-placement", "top");
+    document.getElementById("review box").innerHTML = title;
+
+}
+
+
+</script>
+<script type="text/javascript">
+    $('#exampleModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var recipient = button.data('whatever') // Extract info from data-* attributes
+      var modal = $(this)
+      modal.find('.modal-title').text('New message to ' + recipient)
+      modal.find('.modal-body input').val(recipient)
+    })
+    </script>
+
+<script>
+        var l = []
+
+    function checkBox(checkbox){
+        if ( checkbox.checked == true){
+            l.push(checkbox.id)
+            $("#mySeats").val(l)
+            $("#recipient-name").val(l.length)
+        }else{
+            for (var i = 0; i < l.length; i++) {
+                if (l[i] == checkbox.id) {
+                    l.splice(i, 1)
+                }
+            }
+            $("#mySeats").val(l)
+            $("#recipient-name").val(l.length)
+
+        }
+
+
+    }
+  </script>
+<script>
+    function checkEmpty() {
+        if ($("#mySeats").val()==''){
+            alert("Please select your seat numbers!");
+        }
+
+    }
+
+</script>
+
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+week1
+2020/6/3
+I have registered in Jira account with my teammates, and I plan to compete user story for this object
+with my teammates.
+
+2020/6/5
+I have completed the part of the user story that allocated for me.
+I plan to have a discussion with my teammates about the correction of the user stories written by us in
+next meeting.
+
+2020/6/6
+I have discussed and modified our user story and we decide to upload it onto Jira.
+I plan to start designing UI by using figma, and the issues that I encountered is I have to learn how to
+use figma well.
+
+
+week2
+2020/6/9
+I have completed the UI design for home page and book page.
+I plan to moify my existing UI design and discuss about other UI designs in the next meeting.
+Furthermore, I plan to start completing the third part (architecture) of our proposal.
+
+2020/6/11
+After the disscusion, We complete the UI decision and everyone works on its own part of the rest UI
+design. And since Github has opened, I can upload my diary on Github weekly.
+I plan to complete uploading user story on Jira and add some Epic story if needed.
+
+2020/6/14
+I have uploaded some modified user stories on Jira and added some corresponding epic stories.
+I plan to finish the sprint part on the Jira and complete architecture of our proposal.
+
+week3
+2020/6/15
+I have comopleted a part of the architecture of our proposal (Technology Layer drawing). And I have
+modified the UI design of home page and book page (color setting and details fixing).
+I plan to modify and complete architecture of our proposal in the next meeting.
+
+2020/6/17
+I have completed all architecture of our proposal (UI storyboard).
+I plan to start database building in the next meeting.
+
+2020/6/19
+I have modified and added some new description for our proposal.
+I plan to learn how to build database from now on.
+
+week4
+2020/6/22
+I have set up a flask for our database, and create multiple tables in it (users, events).
+I plan to add corresponding data to those tables.
+
+2020/6/23
+I have upload more tables in database (my_bookings, my_events, reviews).
+I plan to add user data to user tables.
+
+2020/6/24
+I have created a demo for sign in page, and successfully connected to database.
+And also finished sign up page and log out function, which are successfully sent users' data to database.
+I plan to update the connection from backend to frontend when the frontend completed.
+
+2020/6/26
+I have modified modules in database and successfully get the event details inputs form my_events.html
+And also fix multiple bugs for running route
+I plan to complete merge with other teammates in the next meeting.
+
+week5
+2020/6/29
+I have modified my events page, now pictures can be saved in static/img/ after advertising.
+And I also complete dates checking method for advertising.
+I plan to do my work in next sprint after the next meeting.
+
+2020/7/1
+I have completed a part of my_booking page and my_profile page functions.
+I plan to complete full functions for booking.
+
+2020/7/2
+I have completed my_booking page
+I plan to complete seat choosing next.
+
+2020/7/3
+I have completed available tickets for each events
+I plan to fix several bugs for bookings.
+
+2020/7/5
+I have completed email sending function connecting to route
+And I also have completed eamil sending page and a part of my booking page
+I plan to complete seats choosing function later.
+
+week6 
+2020/7/7
+I have completed cancellation of my bookings page.
+I plan to complete cancellation of my events page next.
+
+2020/7/8
+I have completed cancellation of my events page.
+And also add more details into database.
+I plan to fix my UI next.
+
+week7
+2020/7/14
+I have completed a few of reviews adding function.
+And also update database about reviews and replies.
+I plan to complete sending review function later.
+
+2020/7/15
+I have completed reviews and replies functions.
+And successfully connect front-end with database.
+Now I plan to fix some bugs for front-end displaying.
+
+2020/7/16
+I have fixed displaying bugs for reviews and replies.
+I plan to do some filters later.
+
+2020/7/18
+I have added a filter to my_bookings and my_events page.
+And it successfully work.
+I plan to prepare for next demo.
+
+week8
+2020/7/22
+I have added finished events checking and updating.
+And it successfully connected to database.
+I plan to do search function later.
+
+2020/7/24
+I have implemented search bar function in back-end.
+Now it can successfully search by multiple types, title, and description
+I plan to complete recommendation later.
+
+2020/7/25
+I have implemented recommendation function in back-end.
+And it works good so far
+I plan to test if it has some bugs later.
+
+week9
+2020/7/29
+I have fixed some bugs for back-end and a little bit for front-end
+Now it went well, everything is okay
+I plan to do something needed else later.
+
+2020/7/30
+I have added some comments for the function that I implemented
+I think that is the end, all finished! :)

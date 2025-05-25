@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/search.css')}}">
+<head>
+	<meta charset="UTF-8">
+	<title>Searching results!</title>
+	
+	
+</head>
+
+<div id="fh5co-main">
+	<div class="fh5co-narrow-content">
+        <div class="search animate-box" data-animate-effect="fadeInLeft">
+		 <div class="romana_search_domain_area">
+        <div class="container">
+
+            <form action="/" method='POST'>
+            <div class="row">
+                <div class="col-md-4 col-sm-5 col-xs-12">
+                    <div class="romana_domain_text">
+                        <h3 style="color: white">Search Your Event Here</h3>
+
+                        <div class="romana_checkbox">
+							<div class="romana_single_check">
+								<input id="Company" name="company" type="checkbox">
+								<label for="Company"></label>
+								<span>Company</span>
+							</div>
+							<div class="romana_single_check">
+								<input id="Food" name="food" type="checkbox">
+								<label for="Food"></label>
+								<span>Food</span>
+							</div>
+							<div class="romana_single_check">
+								<input id="Education" name="education" type="checkbox">
+								<label for="Education"></label>
+								<span>Education</span>
+							</div>
+                            <div class="romana_single_check">
+                                <input id="Music" name="music" type="checkbox">
+                                <label for="Music"></label>
+                                <span>Music</span>
+							</div>
+                            <div class="romana_single_check">
+                                <input id="More" name="more" type="checkbox">
+                                <label for="More"></label>
+                                <span>More</span>
+							</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- column End -->
+                <div class="col-md-8 col-sm-7 col-xs-12">
+                    <div class="romana_single_check">
+                            <input id="Title" name="title" type="checkbox">
+                            <label for="Title"></label>
+                            <span>Title</span>
+                        </div>
+                        <div class="romana_single_check">
+                            <input id="Description" name="description" type="checkbox">
+                            <label for="Description"></label>
+                            <span>Description</span>
+                        </div>
+                    <div class="romana_domain_search">
+                            <div class="romana_search_input">
+                                <input type="text" name="searchInput" id="searchInput" placeholder="Type something you like to find out">
+                            </div>
+                              <div class="romana_search_submit">
+                                    <input type="submit" value="search">
+                              </div>
+                    </div>
+                </div>
+                <!-- column End -->
+            </div>
+            <!-- row End -->
+            </form>
+        </div>
+        <!-- container End -->
+    </div>
+        </div>
+        <br><br>
+
+        <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Searching results</h2>
+        {% for i in event %}
+        {% if i.status == "upcoming" or i.status == "finished" %}
+        <div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
+            <div class="blog-entry">
+                <a href="{{url_for('book_event', id=i.id)}}" class="blog-img"><img src="{{ i.url }}" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
+                <div class="desc">
+                    <h3><a href="{{url_for('book_event', id=i.id)}}">{{ i.title }}</a></h3>
+                    <span>{{ i.start_date }}</span>
+                    <p>{{ i.description }}</p>
+
+                    <a href="{{url_for('book_event', id=i.id)}}" class="lead">check out here<i class="icon-arrow-right3"></i></a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+</div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+document.getElementById('home_page').className = "fh5co-active";
+
+var t = n = 0,
+    count;
+$(document).ready(function() {
+        
+        count = $("#banner_list a").length;
+        
+        $("#banner_list a:not(:first-child)").hide();
+        
+        $("#banner li").click(function() {
+            var i = $(this).text() - 1;
+            n = i;
+            if (i >= count) return;
+            
+            $("#banner_list a").filter(":visible").fadeOut(500).parent().children().eq(i).fadeIn(1000);
+
+            
+            $(this).toggleClass("on");
+
+            
+            $(this).siblings().removeAttr("class");
+        });
+        t = setInterval("showAuto()", 4000);
+        $("#banner").hover(function() {
+                clearInterval(t)
+            },
+            function() {
+                t = setInterval("showAuto()", 4000);
+            });
+    })
+    
+function showAuto() {
+    n = n >= (count - 1) ? 0 : ++n;
+    $("#banner li").eq(n).trigger('click');
+}
+</script>
+
+<style type="text/css">
+
+#banner {
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: relative;
+    width: 950px;
+    height: 600px;
+    
+    overflow: hidden;
+}
+
+#banner_list img {
+    border: 0px;
+    width: 950px;
+    height: 600px;
+}
+
+#banner_bg {
+    position: absolute;
+    bottom: 0;
+    
+    height: 30px;
+    filter: Alpha(Opacity=30);
+    opacity: 0.3;
+    z-index: 1000;
+    cursor: pointer;
+    width: 478px;
+}
+
+#banner_info {
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    height: 22px;
+    color: #fff;
+    z-index: 1001;
+    cursor: pointer
+}
+
+#banner_text {
+    position: absolute;
+    width: 120px;
+    z-index: 1002;
+    right: 3px;
+    bottom: 3px;
+}
+
+#banner ul {
+    position: absolute;
+    list-style-type: none;
+    filter: Alpha(Opacity=80);
+    opacity: 0.8;
+    z-index: 1002;
+    margin: 0;
+    padding: 0;
+    bottom: 3px;
+    right: 5px;
+}
+
+#banner ul li {
+    padding: 0px 8px;
+    float: left;
+    display: block;
+    color: #FFF;
+    background: #6f4f67;
+    cursor: pointer;
+    border: 1px solid #333;
+}
+
+#banner ul li.on {
+    background-color: #000;
+}
+
+#banner_list a {
+    position: absolute;
+}
+
+</style>
+
+
+{% endblock %}

@@ -1,0 +1,61 @@
+Week 1  
+Group has been made in people of 5.
+Topic has been selected.
+Read and analysis the requirements of the project.
+
+
+Week 2
+Finished Github and Jira account create.
+write my use story part
+start design review page in UI diagram and flow digram.
+Regular meeting and progress sharing 
+
+week 3
+Finish the review function part usestory
+Upload my usestory part to Jira and write relevent epic story
+Discuss the sprint plan such as the start date and end date for each sprint.
+Finsh the timeline structure diagram
+Done our proposal part
+
+
+week4
+Install environments.
+Set up mysql to prepare the initial data reocord.
+write index.html and style.html and some front part desigh for home page
+fix some event data in data,py
+
+week5
+update new database
+complete homepage design and update css style
+finish set up test email account and test it
+write send-email function 
+
+
+week6 and 7
+write send_emaill.py
+finish sending email confirmation page
+improve front part of style.css
+fix bug: database normoliazation of charging.
+finish confirmation.html
+daily meeting
+
+week 8
+fix Carousel size problem and update Carousel style
+add no_matching.html(add no match result page for search)
+keep doing some front end work
+daily meeting
+
+week 9
+finsh my report part
+restyle my_profle page
+restyle index page and booking_event page
+fix some front end bugs
+add web page titles
+daily meeting
+=====all  Software part done!====
+=====Good jobs for everyone====
+=====Good Team!===========
+
+
+
+

@@ -1,0 +1,54 @@
+Diary z5158229
+Week 1
+1.	Created a Jira account and invited team members into the group.
+2.	Analyzed the requirements of the objectives.
+3.	Started with three user stories: ‘searching event’, ‘Home page recommendations’ and ‘Recommend past events for each event’.
+4.	Hold a meeting to discuss user story work with teammates.
+
+Week 2
+1.	GitHub Group created and joined it.
+2.	Used Figma software for UI design.
+3.	Regular meeting.
+4.	Finished own user story and combined with other user stories.
+5.	Software architecture Diagram.
+6.	Finished Background of Proposal.
+
+Week 3
+1.	Continued to improve UI design.
+2.	Uploaded user stories to Jira.
+3.	Finished the rest of parts of proposal.
+
+week 4
+1. Install environments.
+2. Set up mysql to prepare the initial data reocord.
+3. Collected data from websites.
+4. written data.py witj json to record data.
+5. combined doucments with other member's code.
+
+week 5
+1. updated and add new data to database.
+2. implemented email notification and communication of email account.
+3. finished send-email function. 
+4. completed sprint2 task.
+5. daily meeting.
+
+week6 and 7
+1. finished sending email confirmation page with worde.
+2. reseted database and improved UI desgin.
+3. fixed bug with account register.
+4. daily meeting.
+
+week 8
+1. updated finished events to database.
+2. updated reviews to database.
+3. worked on RetrospectiveB Report 
+4. worked on final report.
+
+week 9
+1. updated database.
+2. added past event data.
+3. added reviews data.
+4. added booked data.
+5. fixed some bugs.
+6. Daily meeting.
+7. finished final report

@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+{% block content %}
+<title>My Event Page!</title>
+
+<div style="min-height: 100vh; background-color: rgb(253, 253, 253); color: rgb(11, 10, 10); padding-top: 2.5rem; padding-bottom: 2.5rem;">
+  <div style="max-width: 96rem; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+      <h2 style="font-size: 1.875rem; font-weight: 700;">My Events</h2>
+      <button 
+        style="background-color: #4F46E5; color: rgb(16, 13, 13); padding: 0.5rem 1rem; border-radius: 0.375rem; border: none; cursor: pointer;"
+        onClick="document.getElementById('advertiseModal').classList.remove('hidden')"
+      >
+        Advertise
+      </button>
+    </div>
+
+    <p style="color: #EF4444; margin-bottom: 1rem;">{{ msg }}</p>
+
+    <!-- Modal -->
+    <div 
+      id="advertiseModal" 
+      class="hidden" 
+      style="position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; background-color: rgba(0,0,0,0.8);"
+    >
+      <div style="background-color: #111827; padding: 1.5rem; border-radius: 0.5rem; width: 100%; max-width: 42rem; position: relative;">
+        <button 
+          style="position: absolute; top: 0.5rem; right: 0.75rem; color: #9CA3AF; font-size: 1.5rem; background: none; border: none; cursor: pointer;"
+          onClick="document.getElementById('advertiseModal').classList.add('hidden')"
+        >
+          &times;
+        </button>
+        <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;" style="color: white;">Event Details</h3>
+        <form id="form_data" action='/my_events' method='POST' enctype='multipart/form-data' style="display: flex; flex-direction: column; gap: 1rem;">
+          <input 
+            type="text" name="title" placeholder="Event Title" required
+            style="width: 100%; padding: 0.5rem 0.75rem; background-color: #1F2937; color: white; border-radius: 0.375rem; border: none;"
+          >
+          <textarea 
+            name="description" rows="3" placeholder="Event Description" required
+            style="width: 100%; padding: 0.5rem 0.75rem; background-color: #1F2937; color: white; border-radius: 0.375rem; border: none; resize: vertical;"
+          ></textarea>
+
+          <select 
+            name="tag" required
+            style="width: 100%; padding: 0.5rem 0.75rem; background-color: #1F2937; color: white; border-radius: 0.375rem; border: none;"
+          >
+            <option value="">Select the type of event</option>
+            <option>Music</option>
+            <option>Foods & Drinks</option>
+            <option>Education</option>
+            <option>Company</option>
+            <option>Others</option>
+          </select>
+
+          <input 
+            type="text" name="venue" placeholder="Event Venue" required
+            style="width: 100%; padding: 0.5rem 0.75rem; background-color: #1F2937; color: white; border-radius: 0.375rem; border: none;"
+          >
+
+          <select 
+            name="capacity" required
+            style="width: 100%; padding: 0.5rem 0.75rem; background-color: #1F2937; color: white; border-radius: 0.375rem; border: none;"
+          >
+            <option value="">Select venue size</option>
+            <option value="small">small (5×5)</option>
+            <option value="medium">medium (10×5)</option>
+            <option value="large">large (10×10)</option>
+          </select>
+
+          <input 
+            type="datetime-local" name="start" required
+            style="width: 100%; padding: 0.5rem 0.75rem; background-color: #1F2937; color: white; border-radius: 0.375rem; border: none;"
+          >
+          <input 
+            type="datetime-local" name="end" required
+            style="width: 100%; padding: 0.5rem 0.75rem; background-color: #1F2937; color: white; border-radius: 0.375rem; border: none;"
+          >
+
+          <input 
+            type="text" name="price" placeholder="Price per ticket" required
+            style="width: 100%; padding: 0.5rem 0.75rem; background-color: #1F2937; color: white; border-radius: 0.375rem; border: none;"
+          >
+
+          <input 
+            type="file" name="file" 
+            style="width: 100%; color: white; border: none; background: none; padding: 0;"
+          >
+
+          <div style="text-align: center;">
+            <button 
+              type="submit" 
+              style="background-color: #4F46E5; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; border: none; cursor: pointer;"
+            >
+              Advertise
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div style="margin-bottom: 1rem; border-bottom: 1px solid #374151;">
+      <nav role="tablist" style="display: flex; gap: 1rem; font-size: 0.875rem; font-weight: 500;">
+        <a href="#upcoming" class="tab-link" style="padding: 0.5rem 0.75rem; color: rgb(9, 7, 7); border-bottom: 2px solid #6366F1; text-decoration: none; cursor: pointer;">Upcoming Events</a>
+        <a href="#cancel" class="tab-link" style="padding: 0.5rem 0.75rem; color: #000000; text-decoration: none; cursor: pointer;">Cancelled Events</a>
+        <a href="#finish" class="tab-link" style="padding: 0.5rem 0.75rem; color: #020202; text-decoration: none; cursor: pointer;">Finished Events</a>
+      </nav>
+    </div>
+
+    <!-- Tab Content -->
+    <div id="upcoming" class="tab-content">
+      {% for i in upcoming_event %}
+      <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; border: 1px solid #374151; border-radius: 0.5rem; padding: 1rem;">
+        <img src="{{ i.url }}" alt="Event" style="width: 8rem; height: 8rem; object-fit: cover; border-radius: 0.375rem;">
+        <div>
+          <p style="font-size: 0.875rem; color: #D1D5DB; font-weight: 700;">{{ i.status }}</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Event Title:</strong> {{ i.title }}</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Description:</strong> {{ i.description[:200] }}...</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Type:</strong> {{ i.tags }}</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Venue:</strong> {{ i.venue }}</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Start:</strong> {{ i.start_date }}</p>
+          <p style="margin-bottom: 0.5rem;"><strong>End:</strong> {{ i.end_date }}</p>
+          <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+            <a href="/host_cancel?event_id={{i.id}}" style="background-color: #DC2626; color: white; padding: 0.25rem 0.75rem; border-radius: 0.375rem; text-decoration: none;">Cancel</a>
+            <a href="{{url_for('send_email', id=i.id)}}" style="font-size: 0.875rem; color: #6366F1; text-decoration: underline;">Notify Attendees</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div id="cancel" class="tab-content" style="display:none;">
+      {% for i in cancelled_event %}
+      <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; border: 1px solid #374151; border-radius: 0.5rem; padding: 1rem;">
+        <img src="{{ i.url }}" alt="Event" style="width: 8rem; height: 8rem; object-fit: cover; border-radius: 0.375rem;">
+        <div>
+          <p style="font-size: 0.875rem; color: #D1D5DB; font-weight: 700;">{{ i.status }}</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Event Title:</strong> {{ i.title }}</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Description:</strong> {{ i.description[:200] }}...</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Type:</strong> {{ i.tags }}</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Venue:</strong> {{ i.venue }}</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Start:</strong> {{ i.start_date }}</p>
+          <p style="margin-bottom: 0.5rem;"><strong>End:</strong> {{ i.end_date }}</p>
+          <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+            <a href="/host_delete?event_id={{i.id}}" style="background-color: #DC2626; color: white; padding: 0.25rem 0.75rem; border-radius: 0.375rem; text-decoration: none;">Delete</a>
+            <a href="{{url_for('send_email', id=i.id)}}" style="font-size: 0.875rem; color: #6366F1; text-decoration: underline;">Notify Attendees</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div id="finish" class="tab-content" style="display:none;">
+      {% for i in finished_event %}
+      <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; border: 1px solid #374151; border-radius: 0.5rem; padding: 1rem;">
+        <img src="{{ i.url }}" alt="Event" style="width: 8rem; height: 8rem; object-fit: cover; border-radius: 0.375rem;">
+        <div>
+          <p style="font-size: 0.875rem; color: #D1D5DB; font-weight: 700;">{{ i.status }}</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Event Title:</strong> {{ i.title }}</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Description:</strong> {{ i.description[:200] }}...</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Type:</strong> {{ i.tags }}</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Venue:</strong> {{ i.venue }}</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Start:</strong> {{ i.start_date }}</p>
+          <p style="margin-bottom: 0.5rem;"><strong>End:</strong> {{ i.end_date }}</p>
+          <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+            <a href="/host_delete?event_id={{i.id}}" style="background-color: #DC2626; color: white; padding: 0.25rem 0.75rem; border-radius: 0.375rem; text-decoration: none;">Delete</a>
+            <a href="{{url_for('send_email', id=i.id)}}" style="font-size: 0.875rem; color: #6366F1; text-decoration: underline;">Notify Attendees</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Simple tab switching logic
+  const tabs = document.querySelectorAll('nav[role="tablist"] a');
+  const contents = document.querySelectorAll('.tab-content');
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', e => {
+      e.preventDefault();
+
+      tabs.forEach(t => {
+        t.style.color = '#9CA3AF';
+        t.style.borderBottom = 'none';
+      });
+      tab.style.color = 'white';
+      tab.style.borderBottom = '2px solid #6366F1';
+
+      contents.forEach(c => c.style.display = 'none');
+      contents[i].style.display = 'block';
+    });
+  });
+
+  // Show first tab by default
+  tabs[0].click();
+</script>
+
+{% endblock %}

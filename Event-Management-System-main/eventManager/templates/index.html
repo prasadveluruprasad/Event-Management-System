@@ -1,0 +1,825 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/search.css')}}">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700&family=Digital-7&display=swap" rel="stylesheet">
+</head>
+
+<div id="fh5co-main">
+    <div class="fh5co-narrow-content">
+        <div class="modern-canva-search-background animate-box" data-animate-effect="fadeInLeft" style="background-image: url('{{ url_for('static', filename='img/event_background.jpg') }}');">
+            <div class="modern-canva-search-overlay">
+                <div class="modern-canva-search-domain-area">
+                    <div class="container">
+                        <form action="/" method='POST'>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-5 col-xs-12">
+                                    <div class="modern-canva-domain-text">
+                                        <h3 id="event-timer">Loading Timer...</h3> {# This will be replaced by JS #}
+                                        <div class="modern-canva-checkbox-group">
+                                            <div class="modern-canva-single-check">
+                                                <input id="Company" name="company" type="checkbox">
+                                                <label for="Company">Company</label>
+                                            </div>
+                                            <div class="modern-canva-single-check">
+                                                <input id="Food" name="food" type="checkbox">
+                                                <label for="Food">Food</label>
+                                            </div>
+                                            <div class="modern-canva-single-check">
+                                                <input id="Education" name="education" type="checkbox">
+                                                <label for="Education">Education</label>
+                                            </div>
+                                            <div class="modern-canva-single-check">
+                                                <input id="Music" name="music" type="checkbox">
+                                                <label for="Music">Music</label>
+                                            </div>
+                                            <div class="modern-canva-single-check">
+                                                <input id="More" name="more" type="checkbox">
+                                                <label for="More">More</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-7 col-xs-12">
+                                    <div class="modern-canva-checkbox-group type-filter">
+                                        <div class="modern-canva-single-check">
+                                            <input id="Title" name="title" type="checkbox">
+                                            <label for="Title">Title</label>
+                                        </div>
+                                        <div class="modern-canva-single-check">
+                                            <input id="Description" name="description" type="checkbox">
+                                            <label for="Description">Description</label>
+                                        </div>
+                                    </div>
+                                    <div class="modern-canva-domain-search">
+                                        <div class="modern-canva-search-input">
+                                            <input type="text" name="searchInput" id="searchInput" placeholder="Type something you like to find out">
+                                        </div>
+                                        <div class="modern-canva-search-submit">
+                                            <button type="submit">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft" style="color: #1a1a2e;">Popular events</h2>
+            <div id="banner" class="animate-box" data-animate-effect="fadeInLeft">
+                <div id="banner_bg">
+                </div>
+                <div id="banner_info">
+                </div>
+                <ul>
+                    <li class="on">
+                        1
+                    </li>
+                    <li>
+                        2
+                    </li>
+                    <li>
+                        3
+                    </li>
+                    <li>
+                        4
+                    </li>
+                </ul>
+                <div id="banner_list">
+                    <a href="{{url_for('book_event', id=popular[0].id)}}" target="_blank"><img src="{{popular[0].url}}">
+                        <div class="carousel-caption">{{popular[0].title}}</div>
+                    </a>
+                    
+                    <a href="{{url_for('book_event', id=popular[1].id)}}" target="_blank"><img src="{{popular[1].url}}">
+                        <div class="carousel-caption">{{popular[1].title}}</div>
+                    </a>
+                    <a href="{{url_for('book_event', id=popular[2].id)}}" target="_blank"><img src="{{popular[2].url}}">
+                        <div class="carousel-caption">{{popular[2].title}}</div>
+                    </a>
+                    <a href="{{url_for('book_event', id=popular[3].id)}}" target="_blank"><img src="{{popular[3].url}}">
+                        <div class="carousel-caption">{{popular[3].title}}</div>
+                    </a>
+                </div>
+            </div>
+            
+            <br><br>
+            
+
+             <div class="row row-bottom-padded-md">
+            {% for i in event %}
+            {% if i.status == "upcoming" %}
+            <div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
+                <div class="blog-entry"> {# Removed inline style #}
+                    <a href="{{url_for('book_event', id=i.id)}}" class="blog-img"><img src="{{ i.url }}" class="img-responsive" alt="Event Image: {{ i.title }}"></a> {# Removed inline style #}
+                    <div class="desc">
+                        <h3><a href="{{url_for('book_event', id=i.id)}}">{{ i.title }}</a></h3>
+                        <span>{{ i.start_date }}</span>
+                        <p>{{ i.description }}</p>
+                        {# Timer display for upcoming events #}
+                        <div class="event-timer" id="timer-{{ i.id }}"></div>
+                        <a href="{{url_for('book_event', id=i.id)}}" class="lead">Check out here<i class="icon-arrow-right3"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+             </div>
+
+        <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">finished events</h2>
+
+             <div class="row row-bottom-padded-md">
+            {% for i in event %}
+            {% if i.status == "finished" %}
+            <div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
+                <div class="blog-entry"> {# Removed inline style #}
+                    <a href="{{url_for('book_event', id=i.id)}}" class="blog-img"><img src="{{ i.url }}" class="img-responsive" alt="Event Image: {{ i.title }}"></a> {# Removed inline style #}
+                    <div class="desc">
+                        <h3><a href="{{url_for('book_event', id=i.id)}}">{{ i.title }}</a></h3>
+                        <span>{{ i.start_date }}</span>
+                        <p>{{ i.description }}</p>
+                        {# Display for finished events #}
+                        <div class="event-status timed-out">Timed Out</div>
+                        {# Disabled link for finished events #}
+                        <a href="{{url_for('book_event', id=i.id)}}" class="lead disabled">Check out here<i class="icon-arrow-right3"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+             </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.getElementById('home_page').className = "fh5co-active";
+
+    // Global real-time clock for the search section
+    function updateLiveTimer() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const timeString = `${hours}:${minutes}:${seconds}`;
+        const timerElement = document.getElementById('event-timer');
+        if (timerElement) { // Check if the element exists before updating
+            timerElement.innerText = timeString;
+        }
+    }
+
+    // Initial call to display timer immediately
+    updateLiveTimer();
+    // Update every second
+    setInterval(updateLiveTimer, 1000);
+
+    // JavaScript for event booking timers (5-minute countdown)
+    function setupBookingCountdown(elementId, durationInSeconds) {
+        let timer = durationInSeconds;
+        const timerElement = document.getElementById(elementId);
+
+        if (!timerElement) {
+            console.error("Timer element not found:", elementId);
+            return;
+        }
+
+        const interval = setInterval(function() {
+            const minutes = parseInt(timer / 60, 10);
+            const seconds = parseInt(timer % 60, 10);
+
+            timerElement.innerHTML = "Booking ends in: " +
+                (minutes < 10 ? "0" + minutes : minutes) + "m " +
+                (seconds < 10 ? "0" + seconds : seconds) + "s ";
+
+            if (--timer < 0) {
+                clearInterval(interval);
+                timerElement.innerHTML = "Booking Timed Out!";
+                // Optionally, disable the "Check out now" link when the timer runs out
+                const leadLink = timerElement.nextElementSibling; // Assumes 'lead' link is the next sibling
+                if (leadLink && leadLink.classList.contains('lead')) {
+                    leadLink.classList.add('disabled');
+                    leadLink.href = "#"; // Prevent navigation
+                    leadLink.innerHTML = "Booking Closed"; // Change link text
+                }
+            }
+        }, 1000);
+    }
+
+    // Loop through upcoming events to set up the 5-minute booking timer
+    {% for i in event %}
+        {% if i.status == "upcoming" %}
+            // Set up a 5-minute (300 seconds) countdown for each upcoming event's booking
+            setupBookingCountdown("timer-{{ i.id }}", 300); // 5 minutes * 60 seconds/minute
+        {% endif %}
+    {% endfor %}
+
+
+    // Carousel JavaScript (existing code)
+    var t = n = 0,
+        count;
+    $(document).ready(function() {
+            
+            count = $("#banner_list a").length;
+            
+            $("#banner_list a:not(:first-child)").hide();
+            
+            $("#banner li").click(function() {
+                var i = $(this).text() - 1;
+                n = i;
+                if (i >= count) return;
+                
+                $("#banner_list a").filter(":visible").fadeOut(500).parent().children().eq(i).fadeIn(1000);
+
+                
+                $(this).toggleClass("on");
+
+                
+                $(this).siblings().removeAttr("class");
+            });
+            t = setInterval("showAuto()", 4000);
+            $("#banner").hover(function() {
+                    clearInterval(t)
+                },
+                function() {
+                    t = setInterval("showAuto()", 4000);
+                });
+        })
+        
+    function showAuto() {
+        n = n >= (count - 1) ? 0 : ++n;
+        $("#banner li").eq(n).trigger('click');
+    }
+</script>
+
+<style type="text/css">
+/* Color Palette inspired by Canva's vibrant and clean aesthetic, adapted for a darker theme */
+:root { /* Define custom properties for easier color management */
+    --canva-blue: #00b3cc;
+    --canva-purple: #9b28a2;
+    --canva-pink: #eb2f90;
+    --canva-green: #00cc99;
+    --canva-yellow: #ffc800;
+    --dark-grey-bg: #1a1a2e; /* Darker background */
+    --card-bg: #20203a; /* Slightly lighter dark for cards */
+    --text-light: #e0e0e0; /* Light text for dark background */
+    --btn-primary-bg: #6a0572; /* A deep purple for primary buttons */
+    --btn-secondary-bg: #4a4a6a; /* A muted dark grey for secondary buttons */
+    --border-color: #3b3b5b; /* A subtle dark border */
+    --white: #ffffff; /* Explicitly define white */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-light); /* Light text on dark background */
+    line-height: 1.6;
+    background-color: var(--dark-grey-bg); /* Dark background */
+    margin: 0;
+    padding: 0;
+}
+
+#fh5co-main {
+    padding: 2rem 0; /* Add padding to the main content area */
+}
+
+.fh5co-narrow-content {
+    max-width: 1200px; /* Limit content width for readability */
+    margin: 0 auto; /* Center content */
+    padding: 0 1rem; /* Horizontal padding */
+}
+
+/* Main Content Headings */
+.fh5co-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8em;
+    font-weight: 700;
+    color: var(--text-light); /* Light color for headings */
+    text-align: center;
+    margin-top: 3rem; /* Adjusted from initial to work with new structure */
+    margin-bottom: 2.5rem; /* Adjusted for better spacing */
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.fh5co-heading::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 5px;
+    background: linear-gradient(to right, var(--canva-blue), var(--canva-pink)); /* Updated gradient */
+    border-radius: 2px;
+}
+
+/* General Styling for the Search Section */
+.modern-canva-search-background {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 60px 0;
+    color: var(--white);
+}
+
+.modern-canva-search-background:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    z-index: 1;
+}
+
+.modern-canva-search-background > div {
+    position: relative;
+    z-index: 2;
+}
+
+.modern-canva-search .container {
+    max-width: 1100px;
+}
+
+.modern-canva-search-domain-area {
+    background: none !important; 
+    padding: 0 !important; 
+}
+
+/* Timer Styling (replaces previous h3 styling for this section) */
+.modern-canva-domain-text h3#event-timer {
+    color: var(--white);
+    font-family: 'Digital-7', monospace;
+    font-size: 3.5em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 1.2;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    background: linear-gradient(to right, var(--canva-yellow), #ff8c00); /* Gold to orange gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+/* Original Heading Styling (for other h3 elements, keep this for other sections) */
+.modern-canva-domain-text h3:not(#event-timer) {
+    color: var(--white);
+    font-size: 2.2em;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+    line-height: 1.3;
+}
+
+
+/* Checkbox Group Styling */
+.modern-canva-checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.modern-canva-checkbox-group.type-filter {
+    justify-content: flex-start;
+}
+
+.modern-canva-single-check {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+}
+
+.modern-canva-single-check input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+.modern-canva-single-check label {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    color: var(--white);
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    min-width: 100px;
+    justify-content: center;
+}
+
+.modern-canva-single-check input[type="checkbox"]:checked + label {
+    background-color: var(--white);
+    color: var(--canva-blue); /* Changed to blue for checked state */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-color: var(--white);
+}
+
+.modern-canva-single-check label:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+
+/* Search Input and Button Styling */
+.modern-canva-domain-search {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.modern-canva-search-input {
+    flex-grow: 1;
+}
+
+.modern-canva-search-input input[type="text"] {
+    width: 100%;
+    padding: 18px 25px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1em;
+    color: #333;
+    background-color: var(--white);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.modern-canva-search-input input[type="text"]::placeholder {
+    color: #999;
+}
+
+.modern-canva-search-input input[type="text"]:focus {
+    outline: none;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modern-canva-search-submit button {
+    background-color: var(--canva-yellow); /* Gold/Yellow for the button */
+    color: var(--dark-grey-bg); /* Dark text on button */
+    padding: 18px 40px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+}
+
+.modern-canva-search-submit button:hover {
+    background-color: #ffbf00;
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.25);
+    transform: translateY(-2px);
+}
+.modern-canva-single-check label:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Popular Events Carousel Styling --- */
+#banner {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 60px auto;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    background-color: var(--card-bg); /* Changed to card background color */
+}
+
+#banner_bg {
+    display: none;
+}
+
+#banner_info {
+    display: none;
+}
+
+#banner ul {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#banner ul li {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    cursor: pointer;
+    text-indent: -9999px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+#banner ul li.on {
+    background-color: var(--canva-yellow);
+    transform: scale(1.2);
+    border-color: var(--white);
+}
+
+#banner ul li:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.1);
+}
+
+#banner_list {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+}
+
+#banner_list a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    text-decoration: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#banner_list img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 25px 30px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6em;
+    font-weight: 600;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+/* --- Event Cards Styling --- */
+.row-bottom-padded-md {
+    padding-bottom: 50px;
+}
+
+.col-padding {
+    padding: 15px;
+}
+
+.blog-entry {
+    background-color: var(--card-bg); /* Applied the dark card background */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Darker shadow for dark theme */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 480px; /* Adjusted to fit content and timers/status */
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-entry:hover {
+    transform: translateY(-8px); /* More noticeable lift on hover */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
+}
+
+.blog-entry .blog-img {
+    display: block;
+    width: 100%;
+    height: 250px; /* Increased height for image display */
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid var(--border-color); /* Subtle border below image */
+}
+
+.blog-entry .blog-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.blog-entry:hover .blog-img img {
+    transform: scale(1.08);
+}
+
+.blog-entry .desc {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-entry .desc h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.blog-entry .desc h3 a {
+    color: var(--text-light); /* Light text for titles */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.blog-entry .desc h3 a:hover {
+    color: var(--canva-blue);
+}
+
+.blog-entry .desc span {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-light); /* Light text for dates */
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.blog-entry .desc p {
+    font-size: 0.95em;
+    color: var(--text-light); /* Light text for description */
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.blog-entry .desc .lead {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.25rem; /* Match button padding */
+    border-radius: 5px; /* Match button border-radius */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05em;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    margin-top: auto;
+    background-color: var(--btn-primary-bg); /* Primary button color */
+    color: var(--white); /* White text for buttons */
+    border: none;
+    cursor: pointer;
+}
+
+.blog-entry .desc .lead:hover {
+    background-color: var(--canva-pink); /* Hover color for primary button */
+    transform: translateX(5px);
+}
+
+.blog-entry .desc .lead i {
+    margin-left: 8px;
+    font-size: 0.9em;
+}
+
+/* New styles for timers and "timed out" status */
+.event-timer {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--canva-yellow);
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    background-color: rgba(255, 200, 0, 0.15);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.event-status.timed-out {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--canva-pink);
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    background-color: rgba(235, 47, 144, 0.15);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.lead.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--btn-secondary-bg);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .fh5co-heading {
+        font-size: 2.2em;
+    }
+    .blog-entry .desc h3 {
+        font-size: 1.3em;
+    }
+    .blog-entry .blog-img {
+        height: 220px;
+    }
+    .blog-entry {
+        min-height: 440px;
+    }
+    .modern-canva-domain-text h3#event-timer {
+        font-size: 3em;
+    }
+}
+
+@media (max-width: 767px) {
+    .fh5co-heading {
+        font-size: 2em;
+        margin-bottom: 40px;
+    }
+    #banner {
+        height: auto;
+        border-radius: 10px;
+    }
+    #banner_list {
+        height: 300px;
+    }
+    .carousel-caption {
+        font-size: 1.2em;
+        padding: 15px 20px;
+    }
+    .blog-entry .desc h3 {
+        font-size: 1.2em;
+    }
+    .blog-entry .desc p {
+        -webkit-line-clamp: 4;
+    }
+    .blog-entry .blog-img {
+        height: 200px;
+    }
+    .modern-canva-search-background {
+        padding: 40px 0;
+    }
+    .modern-canva-domain-text h3#event-timer {
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 575px) {
+    .fh5co-heading {
+        font-size: 1.8em;
+    }
+    #banner_list {
+        height: 250px;
+    }
+    .carousel-caption {
+        font-size: 1em;
+        padding: 10px 15px;
+    }
+    .blog-entry .desc p {
+        font-size: 0.95em;
+    }
+    .blog-entry .desc .lead {
+        font-size: 0.95em;
+        padding: 0.6rem 1rem;
+    }
+    .blog-entry .blog-img {
+        height: 160px;
+    }
+    .modern-canva-domain-text h3#event-timer {
+        font-size: 2em;
+    }
+}
+</style>
+
+{% endblock %}

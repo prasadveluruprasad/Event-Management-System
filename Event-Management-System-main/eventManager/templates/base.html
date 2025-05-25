@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+
+    <title>EMP Event Manager</title>
+    <link rel="icon" href="../static/img/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    {% include "html_reference.html" %}
+</head>
+<body style="font-family: 'Inter', sans-serif; line-height: 1.6; color: #eae7e7; background-color:#0E2148; display: flex; min-height: 100vh;">
+
+    <aside style="width: 250px; background-color: #14131323; padding: 0px; box-shadow: 2px 0 10px rgba(10, 10, 10, 0.5); display: flex; flex-direction: column; align-items: center; border-right: 1px solid #060606; flex-shrink: 0;">
+        <div style="background-color: #d1c9c950; padding: 0px; border-radius: 0px;">
+            <a href="/" 
+   style="
+     text-decoration: none; 
+     font-family: 'Montserrat', sans-serif; 
+     font-size: 1.8em; 
+     font-weight: 700; 
+     color: #eaecec; 
+     margin-bottom: 20px; 
+     display: block; 
+     text-align: center; 
+     letter-spacing: 0.05em; 
+     text-transform: uppercase;
+     transition: color 0.3s ease;
+   "
+   onmouseover="this.style.color='#00B1AB'"
+   onmouseout="this.style.color='#eaecec'">
+ Event Management System
+</a>
+
+{% if username %}
+              <a href="{{ url_for('profile') }}" style="text-decoration: none; color: #FFFFFF; display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;">
+                <img src="{{ user.url }}" alt="User Profile" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; border: 3px solid #00B1AB; box-shadow: 0 2px 5px rgba(197, 194, 194, 0.5);" />
+                <p style="font-weight: 600;">Welcome, {{ username }}!</p>
+              </a>
+            {% endif %}
+          </div>
+          
+        <nav style="width: 100%;">
+            <ul style="list-style: none; width: 100%; padding: 0;">
+                <li id="home_page" style="margin-bottom: 8px;">
+                    <a href="/" style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 8px; font-size: 0.95em; color: #FFFFFF; text-decoration: none; transition: background-color 0.3s ease;">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li id="music_event" style="margin-bottom: 8px;">
+                    <a href="/music_event" style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 8px; font-size: 0.95em; color: #FFFFFF; text-decoration: none;">
+                        <i class="fas fa-music"></i> MUSIC
+                    </a>
+                </li>
+                <li id="food_event" style="margin-bottom: 8px;">
+                    <a href="/food_event" style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 8px; font-size: 0.95em; color: #FFFFFF; text-decoration: none;">
+                        <i class="fas fa-utensils"></i> FOOD & DRINK
+                    </a>
+                </li>
+                <li id="education_event" style="margin-bottom: 8px;">
+                    <a href="/education_event" style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 8px; font-size: 0.95em; color: #FFFFFF; text-decoration: none;">
+                        <i class="fas fa-graduation-cap"></i> EDUCATION
+                    </a>
+                </li>
+                <li style="margin-bottom: 8px;">
+                    <a href="{{ url_for('ai_chat') }}" style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 8px; font-size: 0.95em; color: #FFFFFF; text-decoration: none; transition: background-color 0.3s ease;">
+                        <i class="fas fa-robot"></i> AI Assistant
+                    </a>
+                </li>
+                <li id="company_event" style="margin-bottom: 8px;">
+                    <a href="/company_event" style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 8px; font-size: 0.95em; color: #FFFFFF; text-decoration: none;">
+                        <i class="fas fa-building"></i> COMPANY
+                    </a>
+                </li>
+                <li id="more_event" style="margin-bottom: 8px;">
+                    <a href="/more_event" style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 8px; font-size: 0.95em; color: #FFFFFF; text-decoration: none;">
+                        <i class="fas fa-ellipsis-h"></i> MORE
+                    </a>
+                </li>
+            
+                {% if not username %}
+                    <li style="margin-bottom: 8px;">
+                        <a href="sign_up" style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 8px; font-size: 0.95em; color: #FFFFFF; text-decoration: none;">
+                            <i class="fas fa-user-plus"></i> Sign Up
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 8px;">
+                        <a href="sign_in" style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 8px; font-size: 0.95em; color: #FFFFFF; text-decoration: none;">
+                            <i class="fas fa-sign-in-alt"></i> Sign In
+                        </a>
+                    </li>
+                {% else %}
+                    <li style="margin-bottom: 8px;">
+                        <a href="my_bookings" style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 8px; font-size: 0.95em; color: #FFFFFF; text-decoration: none;">
+                            <i class="fas fa-ticket-alt"></i> My Bookings
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 8px;">
+                        <a href="my_events" style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 8px; font-size: 0.95em; color: #FFFFFF; text-decoration: none;">
+                            <i class="fas fa-calendar-alt"></i> My Events
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 8px;">
+                        <a href="logout" style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 8px; font-size: 0.95em; color: #FFFFFF; text-decoration: none;">
+                            <i class="fas fa-sign-out-alt"></i> Log Out
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+            
+        </nav>
+    </aside>
+
+    <main style="flex-grow: 1; padding: 30px; background-color: #fffefe; color: #edebeb; overflow-y: auto;">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

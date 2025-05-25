@@ -1,0 +1,155 @@
+
+.commonh2, .romana_section_title h2, .romana_search_domain_area .romana_domain_text h2, .romana_web_hosting_text h2, .romana_single_table h2, .romana_welcome_webhost_area .romana_welcome_text h2 {
+  font-size: 32px;
+  font-weight: 600;
+  text-transform: capitalize; }
+
+
+a:hover, a:focus, input, textarea {
+  text-decoration: none;
+  outline: none; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0px;
+  padding: 0px; }
+
+
+.search {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  line-height: 30px;
+  color: #222;
+  background: #fff;
+  font-weight: 300; }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    body {
+      font-size: 14px; } }
+  @media only screen and (min-width: 0px) and (max-width: 767px) {
+    body {
+     font-size: 14px; } }
+
+
+
+/* ==================================== romana_search_domain_Area Css ======================= */
+.romana_search_domain_area {
+  background: url(../img/backgroud/domain_bg.jpg); }
+  @media only screen and (min-width: 480px) and (max-width: 767px) {
+    .romana_search_domain_area {
+      padding-bottom: 50px; } }
+  .romana_search_domain_area .romana_domain_text {
+    padding-top: 64px;
+    padding-bottom: 76px; }
+    @media only screen and (min-width: 0px) and (max-width: 767px) {
+      .romana_search_domain_area .romana_domain_text {
+        padding-bottom: 40px;
+        text-align: center; } }
+    .romana_search_domain_area .romana_domain_text h2 {
+      color: #fff;
+      margin-bottom: 3px; }
+      @media only screen and (min-width: 992px) and (max-width: 1199px) {
+        .romana_search_domain_area .romana_domain_text h2 {
+          font-size: 25px; } }
+      @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .romana_search_domain_area .romana_domain_text h2 {
+          font-size: 25px; } }
+
+.romana_domain_search {
+  padding-top: 58px; }
+
+.romana_search_input input {
+  background: #fff;
+  border: medium none;
+  height: 54px;
+  padding-left: 40px;
+  position: relative;
+  width: 85%;
+  border-radius: 50px; }
+  @media only screen and (min-width: 0px) and (max-width: 767px) {
+    .romana_search_input input {
+      font-size: 11px;
+      padding-left: 8px; } }
+
+.romana_search_submit input {
+  background: #288feb;
+  border: 3px solid #fff;
+  border-radius: 50px;
+  color: #ffffff;
+  height: 54px;
+  position: absolute;
+  right: 120px;
+  text-transform: uppercase;
+  top: 58px;
+  width: 100px;
+  font-size: 14px;
+  font-weight: 600;
+ }
+
+
+  .romana_search_submit input:hover {
+    background: #dddddd none repeat scroll 0 0;
+    box-shadow: 0px 0px 3px black;
+    color: #222222; }
+
+
+.romana_single_check {
+  color: #fff;
+  float: left;
+  padding-right: 30px;
+  margin-top: 10px; }
+  @media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .romana_single_check {
+      padding-right: 11px; } }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .romana_single_check {
+      padding-right: 8px; } }
+  @media only screen and (min-width: 0px) and (max-width: 767px) {
+    .romana_single_check {
+      padding-right: 8px; } }
+
+.romana_single_check span {
+  margin-left: 7px; }
+
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+  .romana_checkbox {
+    display: block;
+    margin: 0 auto;
+    max-width: 270px;
+    text-align: center; } }
+
+.romana_single_check {
+  position: relative; }
+
+.romana_single_check label {
+  background: #ffffff none repeat scroll 0 0;
+  border-radius: 2px;
+  cursor: pointer;
+  height: 14px;
+  left: 0;
+  position: absolute;
+  top: 7px;
+  width: 14px; }
+
+.romana_single_check label:after {
+  opacity: 0;
+  position: absolute;
+  content: "\2713";
+
+  background: transparent;
+  top: -7px;
+  left: 2px;
+  border-top: none;
+  border-right: none;
+  font-size: 9px; }
+
+.romana_single_check label:focus::after {
+  opacity: 1; }
+
+.romana_single_check input[type=checkbox]:checked + label:after {
+  opacity: 1;
+  color: #fff; }
+
+.romana_single_check input[type=checkbox]:checked + label {
+  background: #288feb; }
+
+.romana_single_check input[type=checkbox] {
+  visibility: hidden; }

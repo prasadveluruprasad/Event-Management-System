@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <title>Sign In Page!</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/signup.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    <form class="form-signin" action='/sign_in' method='POST'>
+  <a href="/"><img class="mb-4" src="../static/img/emp.jpg" alt="" width="72" height="72"></a>
+  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+  <label for="inputEmail" style="float:left;">Email address</label>
+  <input type="email" id='inputEmail' name="email" class="form-control" placeholder="Email address" required autofocus>
+  <label for="inputPassword" style="float:left;">Password</label>
+  <input type="password" id='inputPassword' name="password" class="form-control" placeholder="Password" required>
+  <div class="checkbox mb-3"></div>
+      <div style="color: red"><p>  {{ msg }} </p></div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <br>
+  <a href="sign_up" style="float:left; text-align:left">Sign Up</a>
+  <a href="/" style="float:right; text-align:right">Go Back</a>
+
+</form>
+</body>
+</html>
