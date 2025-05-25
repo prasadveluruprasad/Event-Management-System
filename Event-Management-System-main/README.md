@@ -37,9 +37,9 @@ Once Mysql has been installed and password has been set properly, you can procee
 
 The following commands are used to initialize the database for the software. To start MySql, you should type the following command on terminal or prompt. The password should be exactly 12345678.
 
-$  mysql -u root -p
+$  username : root
 
-$  Password: 12345678
+$  Password: your database password
 
 To create a database,  exactly the following commands should be used to initialize a database.  The name of the database must be “eventManager” so that our software can connect to exactly this database.
 
